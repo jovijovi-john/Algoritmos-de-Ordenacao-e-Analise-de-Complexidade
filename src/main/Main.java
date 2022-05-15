@@ -14,57 +14,66 @@ public class Main {
 
         Random random = new Random();
 
-        /* -------------------------------------------------------------------------------
+        ///* -------------------------------------------------------------------------------
         //key: String, value: Double
 
-
-        Item<String, Double > [] vetorGenerics = new Item[100];
+        Item<String, Double> [] vetorGenerics = new Item[1000];
         for (int i = 0; i < vetorGenerics.length; i++){
             String chave = AlphaNumericStringGenerator.generateRandomString(10);
             Double valor = random.nextDouble() * 100;
             vetorGenerics[i] = new Item<>(chave, valor);
         }
 
-        QuickSort.sort(vetorGenerics, 0, vetorGenerics.length - 1, -1);
+        long start = System.nanoTime();
+        Arrays.sort(vetorGenerics);
+        long end = System.nanoTime();
+;
 
         for (int j = 0; j < vetorGenerics.length; j++){
             System.out.println(vetorGenerics[j].toString());
         }
+
+
         //*/
 
         /* ---------------------------------------------------------------------------------
         // key: Double, value: String
 
-        Item<Double, String > [] vetorGenerics = new Item[100];
+        Item<Double, String> [] vetorGenerics = new Item[1000];
         for (int i = 0; i < vetorGenerics.length; i++){
             Double chave = random.nextDouble() * 100;
             String valor = AlphaNumericStringGenerator.generateRandomString(10);
             vetorGenerics[i] = new Item<>(chave, valor);
         }
 
-        QuickSort.sort(vetorGenerics, 0, vetorGenerics.length -1, -1);
-
+        SelectionSortMinMax.sort(vetorGenerics, -1);
+        /*
         for (int j = 0; j < vetorGenerics.length; j++){
             System.out.println(vetorGenerics[j].toString());
         }
         */
 
-        /* key: Double, value: Integer -------------------------------------------------------------
+        /* -------------------------------------------------------------------------
+        // key: Double, value: Integer -------------------------------------------------------------
 
-        Item<Double, Integer> [] vetorGenerics = new Item[100];
+        Item<Double, Integer> [] vetorGenerics = new Item[1000];
 
         for (int i = 0; i < vetorGenerics.length; i++){
             Double chave = random.nextDouble() * 100;
             Integer valor = random.nextInt(100);
             vetorGenerics[i] = new Item<>(chave, valor);
         }
-        QuickSort.sort(vetorGenerics, 0, vetorGenerics.length -1, -1);
 
+        SelectionSortMinMax.sort(vetorGenerics, -1);
+
+        /*
         for (int j = 0; j < vetorGenerics.length; j++){
             System.out.println(vetorGenerics[j].toString());
         }
 
         */
+        //*/
+
 
     }
 }

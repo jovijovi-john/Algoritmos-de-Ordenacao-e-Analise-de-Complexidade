@@ -4,7 +4,12 @@ import main.Item;
 
 public class SelectionSortMinMax {
 
+    static int comparacoes = 0;
+    static int atribuicoes = 0;
+
+
     public static void sort(Item<?, ?>[] vetor, int order){
+        long start = System.nanoTime();
 
         for (int i = 0, j = vetor.length - 1; i < j; i++, j--){
 
@@ -18,6 +23,8 @@ public class SelectionSortMinMax {
 
             int min_i = i; // iniciando o indice do min
             int max_i = i; // iniciando o indice do max
+
+            atribuicoes += 4;
 
             /* lembrando que como j está iterando do final do vetor ate o meio, e a cada iteração
              está sendo decrementado, a ultima posição do array irá guardar o maior elemento.
@@ -33,26 +40,36 @@ public class SelectionSortMinMax {
                     if (vetor[k].comparar(max.getChave()) > 0){ // se o elemento atual for maior que o maior elemento
                         max = vetor[k]; // maior elemento
                         max_i = k; // indice do maior elemento
+
+                        atribuicoes += 2;
+
                     } else if (vetor[k].comparar(min.getChave()) < 0) { // se o elemento atual for menor que o menor elemento
                         min = vetor[k]; // menor elemento
                         min_i = k; // indice do menor elemento
+
+                        atribuicoes += 2;
                     }
                 } else {
                     if (vetor[k].comparar(max.getChave()) < 0){ // se o elemento atual for menor que o maior elemento
                         max = vetor[k]; // maior elemento
                         max_i = k; // indice do maior elemento
+
+                        atribuicoes += 2;
                     } else if (vetor[k].comparar(min.getChave()) > 0) { // se o elemento atual for maior que o menor elemento
                         min = vetor[k]; // menor elemento
                         min_i = k; // indice do menor elemento
+
+                        atribuicoes += 2;
                     }
                 }
+                comparacoes += 2;
             }
 
             // colocando o menor elemento atual na posição i
             Item <?, ?> tempMin = vetor[min_i];
             vetor[min_i] = vetor[i];
             vetor[i] = tempMin;
-
+            atribuicoes += 3;
 
             // Shifting the max. The equal condition
             // happens if we shifted the max to arr[min_i]
@@ -70,6 +87,15 @@ public class SelectionSortMinMax {
                 vetor[max_i] = vetor[j];
                 vetor[j] = tempMax;
             }
+
+            comparacoes++;
+            atribuicoes += 3;
         }
+
+        long end = System.nanoTime();
+
+        System.out.println("Comparações: " + comparacoes);
+        System.out.println("Atribuiçõees: " + atribuicoes);
+        System.out.println("Tempo: " + (end - start));
     }
 }
